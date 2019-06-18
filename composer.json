@@ -1,0 +1,22 @@
+{
+  "name": "gofintech/allegro-pubsub-client",
+  "description": "Allegro extension for sending Pub/Sub messages",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Antanas Kompanas",
+      "email": "a.kompanas@gofintech.lt"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*",
+    "google/cloud-pubsub": "^1.13",
+    "symfony/serializer": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "GoFinTech\\Allegro\\PubSub\\": "src/"
+    }
+  }
+}
