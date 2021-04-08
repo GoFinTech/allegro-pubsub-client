@@ -3,7 +3,7 @@
 /*
  * This file is part of the Allegro framework.
  *
- * (c) 2019 Go Financial Technologies, JSC
+ * (c) 2019-2021 Go Financial Technologies, JSC
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -29,7 +29,7 @@ class TopicSinkFactory
      */
     private $serializer;
 
-    public function __construct(?PubSubClient $client, ?SerializerInterface $serializer)
+    public function __construct(?PubSubClient $client = null, ?SerializerInterface $serializer = null)
     {
         $this->client = $client ?? new PubSubClient();
         $this->serializer = $serializer;
@@ -37,7 +37,10 @@ class TopicSinkFactory
 
     public function createSink(string $topicName): TopicSink
     {
-        return new TopicSink($topicName, $this->client, $this->serializer);
+        if (isset($this))
+            return new TopicSink($topicName, $this->client, $this->serializer);
+        $oneShot = new TopicSinkFactory();
+        return $oneShot->createSink($topicName);
     }
 
     public function __invoke(string $topicName)
